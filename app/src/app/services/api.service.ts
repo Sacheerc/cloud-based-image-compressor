@@ -10,11 +10,7 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getImage(urlArray: any[]): Observable<any> {
-    let forkArr = [];
-    urlArray.forEach(item =>{
-      forkArr.push(this.httpClient.get(item, { responseType: 'blob' }))
-    })
-    return forkJoin(forkArr);
+  getImage(imgUrl): Observable<any> {
+    return this.httpClient.get(imgUrl, { responseType: 'blob' })
   }
 }

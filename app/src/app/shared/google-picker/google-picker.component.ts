@@ -54,9 +54,9 @@ export class GooglePickerComponent {
           addView(new google.picker.DocsUploadView()).
           setCallback(function (e) {
             if (e[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
-              let doc = e[google.picker.Response.DOCUMENTS][0];
-              src = doc[google.picker.Document.URL];
-              console.log("Document selected is", doc, "and URL is ", src)
+              let docs = e[google.picker.Response.DOCUMENTS];
+              // src = doc[google.picker.Document.URL];
+              console.log(docs)
             }
           }).
           build();
