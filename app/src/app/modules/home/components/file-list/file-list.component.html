@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="col-md-7">
+    <mat-list>
+      <h3 mat-subheader>Images</h3>
+      <mat-list-item *ngFor="let folder of folders">
+        <mat-icon mat-list-icon>perm_media</mat-icon>
+        <h4 mat-line>Fetching url :</h4>
+        <mat-icon class="text-success">check_circle</mat-icon>
+        <mat-icon class="text-danger">info</mat-icon>
+        <p mat-line>
+          <mat-progress-bar
+            color="primary"
+            mode="indeterminate"
+          ></mat-progress-bar>
+        </p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </div>
+</div>

@@ -11,6 +11,13 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { ImageCompressComponent } from './shared/image-compress/image-compress.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
+import { FileService } from './services/file.service';
+import { FileListComponent } from './modules/home/components/file-list/file-list.component';
+
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -20,18 +27,24 @@ import { ApiService } from './services/api.service';
     HomeComponent,
     GooglePickerComponent,
     ImageCompressComponent,
-    
+    FileListComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
     HttpClientModule,
+    MatProgressBarModule
   ],
   providers: [
     NgxImageCompressService,
-    ApiService
+    ApiService,
+    FileService
   ],
   bootstrap: [AppComponent]
 })
