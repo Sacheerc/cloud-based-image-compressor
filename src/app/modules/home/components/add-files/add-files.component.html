@@ -1,0 +1,30 @@
+<div class="container">
+  <mat-card class="text-center add-files">
+    <mat-card-header>
+      <mat-card-title>Pic your images</mat-card-title>
+    </mat-card-header>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-card class="button-card">
+          <mat-card-title>local computer</mat-card-title>
+          <button mat-fab aria-label="Upload files from local computer">
+            <mat-icon>computer</mat-icon>
+          </button>
+        </mat-card>
+      </div>
+      <div class="col-md-4">
+          <app-google-picker></app-google-picker>
+      </div>
+      
+      <div class="col-md-4">
+        <mat-card class="button-card">
+          <mat-card-title>Drop Box</mat-card-title>
+          <button mat-fab aria-label="Not completed">
+            <mat-icon>block</mat-icon>
+          </button>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card>
+  <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+</div>

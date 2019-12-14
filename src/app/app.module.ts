@@ -18,7 +18,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
+import { AddFilesComponent } from './modules/home/components/add-files/add-files.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     GooglePickerComponent,
     ImageCompressComponent,
     FileListComponent,
+    AddFilesComponent,
 
   ],
   imports: [
@@ -39,7 +41,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatButtonModule,
     MatIconModule,
     HttpClientModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatCardModule,
   ],
   providers: [
     NgxImageCompressService,

@@ -1,40 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FileService } from 'src/app/services/file.service';
 
-export interface Section {
-  name: string;
-  updated: Date;
-}
+
 
 @Component({
   selector: 'app-file-list',
   templateUrl: './file-list.component.html',
   styleUrls: ['./file-list.component.css']
 })
-export class FileListComponent {
+export class FileListComponent implements OnInit {
+  selectedFiles: any;
 
-  folders: Section[] = [
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
-    },
-    {
-      name: 'Work',
-      updated: new Date('1/28/16'),
-    }
-  ];
-  notes: Section[] = [
-    {
-      name: 'Vacation Itinerary',
-      updated: new Date('2/20/16'),
-    },
-    {
-      name: 'Kitchen Remodel',
-      updated: new Date('1/18/16'),
-    }
-  ];
+  constructor(private fileService: FileService) { }
+
+  ngOnInit() {
+    this.selectedFiles = this.fileService.getSelectedFiles();
+    console.log(this.selectedFiles)
+  }
+
 
 }

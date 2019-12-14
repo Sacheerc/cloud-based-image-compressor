@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FileService {
-  downloadedFiles: any;
+  downloadedFiles: [];
+  selectedFiles:[];
   constructor() { }
 
   setDownloadedFiles(files){
@@ -14,4 +15,14 @@ export class FileService {
   getDownloadedFiles(){
     return this.downloadedFiles;
   }
+
+  setSelectedFiles(files) {
+    this.selectedFiles = files;
+  }
+
+  getSelectedFiles() {
+    return this.selectedFiles;
+  }
+
+
 }
