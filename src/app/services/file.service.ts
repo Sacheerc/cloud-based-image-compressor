@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FileService {
-  downloadedFiles: [];
-  selectedFiles:[];
+  downloadedFiles= [];
+  selectedFiles=[1,2,3,4];
   constructor() { }
 
   setDownloadedFiles(files){

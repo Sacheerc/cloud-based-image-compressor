@@ -13,7 +13,9 @@
         </mat-card>
       </div>
       <div class="col-md-4">
-          <app-google-picker></app-google-picker>
+          <app-google-picker
+            (selectedFiles) = "onFileSelect($event)"
+          ></app-google-picker>
       </div>
       
       <div class="col-md-4">

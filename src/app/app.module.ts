@@ -47,7 +47,7 @@ import { MatCardModule } from '@angular/material/card';
   providers: [
     NgxImageCompressService,
     ApiService,
-    FileService
+    FileService,
   ],
   bootstrap: [AppComponent]
 })

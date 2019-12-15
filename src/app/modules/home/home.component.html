@@ -1,6 +1,6 @@
-
 <!-- <app-google-picker></app-google-picker>
 
 <app-image-compress></app-image-compress> -->
-<app-add-files></app-add-files>
-<app-file-list></app-file-list>
+<app-add-files (selectedFiles)="onFileSelect($event)"> </app-add-files>
+<button  (click)='test()'>click to see</button>
+<app-file-list *ngIf='isVisible' [selectedFiles]="selectedFiles"></app-file-list>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { FileService } from 'src/app/services/file.service';
 
 
@@ -6,17 +6,16 @@ import { FileService } from 'src/app/services/file.service';
 @Component({
   selector: 'app-file-list',
   templateUrl: './file-list.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./file-list.component.css']
 })
 export class FileListComponent implements OnInit {
-  selectedFiles: any;
-
-  constructor(private fileService: FileService) { }
+  @Input() selectedFiles;
 
   ngOnInit() {
-    this.selectedFiles = this.fileService.getSelectedFiles();
     console.log(this.selectedFiles)
   }
+
 
 
 }

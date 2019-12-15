@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { keys } from '../../../keys'
 import { FileService } from 'src/app/services/file.service';
+import { FileListComponent } from 'src/app/modules/home/components/file-list/file-list.component';
 declare var gapi: any;
 declare var google: any;
 
@@ -10,6 +11,8 @@ declare var google: any;
   styleUrls: ['./google-picker.component.css']
 })
 export class GooglePickerComponent{
+  @Output() selectedFiles = new EventEmitter<any>();
+
   constructor(private fileService: FileService) { }
   developerKey = keys.ApiKey;
   clientId = keys.ClientId
@@ -50,11 +53,9 @@ export class GooglePickerComponent{
               setCallback((e) => {
                 if (e[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
                   let docs = e[google.picker.Response.DOCUMENTS];
-                  // src = doc[google.picker.Document.URL];
                   this.fileService.setSelectedFiles(docs);
                   console.log(this.fileService.getSelectedFiles())
-                  
-                  // this.fileService.setSelectedFiles(docs)
+                  this.selectedFiles.emit(docs)
                 }
               }).
               build();
@@ -68,8 +69,5 @@ export class GooglePickerComponent{
     this.pickerApiLoaded = true;
   }
 
-  handleAuthResult(authResult) {
-    
-  }
 
 }
