@@ -1,17 +1,19 @@
 <div class="container">
-  <div class="col-md-7">
+  <div class="">
     <mat-list>
       <h3 mat-subheader>Images</h3>
-      <mat-list-item *ngFor="let folder of selectedFiles">
+      <mat-list-item *ngFor="let file of imageArr">
         <mat-icon mat-list-icon>perm_media</mat-icon>
-        <h4 mat-line>Fetching url :</h4>
-        <mat-icon class="text-success">check_circle</mat-icon>
-        <mat-icon class="text-danger">info</mat-icon>
+        <p mat-line>url : {{ file.url }}</p>
+        <mat-icon *ngIf='file.status == "done"' class="text-success">check_circle</mat-icon>
+        <mat-icon *ngIf='file.status == "failed"' class="text-danger">info</mat-icon>
+        
         <p mat-line>
-          <mat-progress-bar
+          <mat-progress-bar *ngIf='file.status == "processing"'
             color="primary"
             mode="indeterminate"
           ></mat-progress-bar>
+          Original Size Bytes : {{file.size/8/1024}}KB
         </p>
       </mat-list-item>
       <mat-divider></mat-divider>
