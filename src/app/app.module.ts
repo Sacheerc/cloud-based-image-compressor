@@ -20,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AddFilesComponent } from './modules/home/components/add-files/add-files.component';
 import { MatCardModule } from '@angular/material/card';
+import { CompressorComponent } from './modules/home/components/compressor/compressor.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { MatCardModule } from '@angular/material/card';
     ImageCompressComponent,
     FileListComponent,
     AddFilesComponent,
+    CompressorComponent,
 
   ],
   imports: [

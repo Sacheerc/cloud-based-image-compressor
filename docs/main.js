@@ -45,6 +45,17 @@ module.exports = "<div class=\"container\">\n  <mat-card class=\"text-center add
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/index.js!./src/app/modules/home/components/compressor/compressor.component.html":
+/*!********************************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/modules/home/components/compressor/compressor.component.html ***!
+  \********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container text-center\">\n  <mat-card class=\"button-card\">\n    <app-image-compress></app-image-compress>\n  </mat-card>\n</div>\n"
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/modules/home/components/file-list/file-list.component.html":
 /*!******************************************************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/modules/home/components/file-list/file-list.component.html ***!
@@ -52,7 +63,7 @@ module.exports = "<div class=\"container\">\n  <mat-card class=\"text-center add
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"\">\n    <mat-list>\n      <h3 mat-subheader>Images</h3>\n      <mat-list-item *ngFor=\"let file of imageArr\">\n        <mat-icon mat-list-icon>perm_media</mat-icon>\n        <p mat-line>url : {{ file.url }}</p>\n        <mat-icon *ngIf='file.status == \"done\"' class=\"text-success\">check_circle</mat-icon>\n        <mat-icon *ngIf='file.status == \"failed\"' class=\"text-danger\">info</mat-icon>\n        \n        <p mat-line>\n          <mat-progress-bar *ngIf='file.status == \"processing\"'\n            color=\"primary\"\n            mode=\"indeterminate\"\n          ></mat-progress-bar>\n          Original Size Bytes : {{file.size/8/1024}}KB\n        </p>\n      </mat-list-item>\n      <mat-divider></mat-divider>\n    </mat-list>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"\">\n    <mat-list>\n      <h3 mat-subheader>Images</h3>\n      <mat-list-item *ngFor=\"let file of imageArr\">\n        <mat-icon mat-list-icon>perm_media</mat-icon>\n        <p mat-line>url : https://www.googleapis.com/drive/v2/files/{{ file.id }}</p>\n        <mat-icon *ngIf='file.status == \"done\"' class=\"text-success\">check_circle</mat-icon>\n        <mat-icon *ngIf='file.status == \"failed\"' class=\"text-danger\">info</mat-icon>\n        \n        <p mat-line>\n          <mat-progress-bar *ngIf='file.status == \"processing\"'\n            color=\"primary\"\n            mode=\"indeterminate\"\n          ></mat-progress-bar>\n          Original Size Bytes : {{file.size/8/1024}}KB\n        </p>\n      </mat-list-item>\n      <mat-divider></mat-divider>\n    </mat-list>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -63,7 +74,7 @@ module.exports = "<div class=\"container\">\n  <div class=\"\">\n    <mat-list>\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <app-google-picker></app-google-picker>\n\n<app-image-compress></app-image-compress> -->\n<app-add-files (selectedFiles)=\"onFileSelect($event)\"> </app-add-files>\n<app-file-list *ngIf='isVisible' [selectedFiles]=\"selectedFiles\"></app-file-list>\n"
+module.exports = "<!-- <app-google-picker></app-google-picker>\n\n<app-image-compress></app-image-compress> -->\n<app-add-files (selectedFiles)=\"onFileSelect($event)\"> </app-add-files>\n<app-file-list *ngIf='isVisible' [selectedFiles]=\"selectedFiles\"></app-file-list>\n<app-compressor></app-compressor>\n"
 
 /***/ }),
 
@@ -85,7 +96,7 @@ module.exports = "<mat-card class=\"button-card\">\n  <mat-card-title>Google Dri
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<input\n  type=\"file\"\n  accept=\".jpg,.png,.jpeg\"\n  id=\"image-input\"\n  (change)=\"selectFile($event)\"\n/>\n<br /><br />\nOriginal: Size: {{ sizeOfOriginalImage | number: \"1.2-2\" }}MB <br /><img\n  [src]=\"localUrl\"\n  height=\"200px\"\n/>\n<br /><br /><br />\nCompressed: Size: {{ sizeOFCompressedImage | number: \"1.2-2\" }}MB<br />\n<img [src]=\"localCompressedURl\" height=\"150px\" />\n"
+module.exports = "<button mat-raised-button color=\"accent\" aria-label=\"Not completed\" (click)='selectFile()'>\n  <mat-icon style=\"color: green\">play_circle_filled</mat-icon> Start\n</button>\n\n<!-- <input\n  type=\"file\"\n  accept=\".jpg,.png,.jpeg\"\n  id=\"image-input\"\n  (change)=\"selectFile($event)\"\n/> -->\n<br /><br />\nOriginal: Size: {{ sizeOfOriginalImage | number: \"1.2-2\" }}MB <br /><img\n  [src]=\"localUrl\"\n  height=\"200px\"\n/>\n<br /><br /><br />\nCompressed: Size: {{ sizeOFCompressedImage | number: \"1.2-2\" }}MB<br />\n<img [src]=\"localCompressedURl\" height=\"150px\" />\n"
 
 /***/ }),
 
@@ -208,6 +219,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_progress_bar__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/material/progress-bar */ "./node_modules/@angular/material/esm2015/progress-bar.js");
 /* harmony import */ var _modules_home_components_add_files_add_files_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./modules/home/components/add-files/add-files.component */ "./src/app/modules/home/components/add-files/add-files.component.ts");
 /* harmony import */ var _angular_material_card__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/material/card */ "./node_modules/@angular/material/esm2015/card.js");
+/* harmony import */ var _modules_home_components_compressor_compressor_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./modules/home/components/compressor/compressor.component */ "./src/app/modules/home/components/compressor/compressor.component.ts");
+
 
 
 
@@ -242,6 +255,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _shared_image_compress_image_compress_component__WEBPACK_IMPORTED_MODULE_11__["ImageCompressComponent"],
             _modules_home_components_file_list_file_list_component__WEBPACK_IMPORTED_MODULE_15__["FileListComponent"],
             _modules_home_components_add_files_add_files_component__WEBPACK_IMPORTED_MODULE_20__["AddFilesComponent"],
+            _modules_home_components_compressor_compressor_component__WEBPACK_IMPORTED_MODULE_22__["CompressorComponent"],
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -318,6 +332,48 @@ AddFilesComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/modules/home/components/compressor/compressor.component.css":
+/*!*****************************************************************************!*\
+  !*** ./src/app/modules/home/components/compressor/compressor.component.css ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZHVsZXMvaG9tZS9jb21wb25lbnRzL2NvbXByZXNzb3IvY29tcHJlc3Nvci5jb21wb25lbnQuY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/modules/home/components/compressor/compressor.component.ts":
+/*!****************************************************************************!*\
+  !*** ./src/app/modules/home/components/compressor/compressor.component.ts ***!
+  \****************************************************************************/
+/*! exports provided: CompressorComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CompressorComponent", function() { return CompressorComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+
+
+let CompressorComponent = class CompressorComponent {
+    constructor() { }
+    ngOnInit() {
+    }
+};
+CompressorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-compressor',
+        template: __webpack_require__(/*! raw-loader!./compressor.component.html */ "./node_modules/raw-loader/index.js!./src/app/modules/home/components/compressor/compressor.component.html"),
+        styles: [__webpack_require__(/*! ./compressor.component.css */ "./src/app/modules/home/components/compressor/compressor.component.css")]
+    })
+], CompressorComponent);
+
+
+
+/***/ }),
+
 /***/ "./src/app/modules/home/components/file-list/file-list.component.css":
 /*!***************************************************************************!*\
   !*** ./src/app/modules/home/components/file-list/file-list.component.css ***!
@@ -342,19 +398,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var src_app_services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var src_app_services_file_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/file.service */ "./src/app/services/file.service.ts");
+
 
 
 
 let FileListComponent = class FileListComponent {
-    constructor(api) {
+    constructor(api, fileService) {
         this.api = api;
+        this.fileService = fileService;
         this.imageArr = [];
-        this.test = "mata baaaa";
+        this.downloadedFiles = [];
     }
     ngOnInit() {
+        this.downloadedFiles = [];
         this.selectedFiles.forEach(element => {
             this.imageArr.push({
-                url: element.url,
+                id: element.id,
                 mimeType: element.mimeType,
                 name: element.name,
                 size: element.sizeBytes,
@@ -363,8 +423,13 @@ let FileListComponent = class FileListComponent {
         });
         this.imageArr.forEach(image => {
             console.log(image);
-            this.api.getImage(image.url).subscribe(resultImage => {
+            this.api.getImage(image.id).subscribe(resultImage => {
                 image.status = "done";
+                this.downloadedFiles.push({
+                    image_details: image,
+                    image: resultImage
+                });
+                this.fileService.setDownloadedFiles(this.downloadedFiles);
             }, error => {
                 image.status = "failed";
             });
@@ -373,7 +438,8 @@ let FileListComponent = class FileListComponent {
     }
 };
 FileListComponent.ctorParameters = () => [
-    { type: src_app_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"] }
+    { type: src_app_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"] },
+    { type: src_app_services_file_service__WEBPACK_IMPORTED_MODULE_3__["FileService"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])()
@@ -458,12 +524,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const httpOptions = {
+    headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+        'Content-Type': 'application/json',
+        'Authorization': 'my-auth-token'
+    })
+};
 let ApiService = class ApiService {
     constructor(httpClient) {
         this.httpClient = httpClient;
     }
-    getImage(imgUrl) {
-        return this.httpClient.get(imgUrl, { responseType: 'blob' });
+    getImage(id) {
+        let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+            'Authorization': 'Bearer ' + this.accessToken
+        });
+        let url = 'https://www.googleapis.com/drive/v2/files/' + id + '?alt=media';
+        return this.httpClient.get(url, { headers: headers, responseType: 'blob' });
     }
 };
 ApiService.ctorParameters = () => [
@@ -546,13 +622,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../keys */ "./src/keys.ts");
 /* harmony import */ var src_app_services_file_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/file.service */ "./src/app/services/file.service.ts");
+/* harmony import */ var src_app_services_api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/api.service */ "./src/app/services/api.service.ts");
+
 
 
 
 
 let GooglePickerComponent = class GooglePickerComponent {
-    constructor(fileService) {
+    constructor(fileService, api) {
         this.fileService = fileService;
+        this.api = api;
         this.selectedFiles = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.developerKey = _keys__WEBPACK_IMPORTED_MODULE_2__["keys"].ApiKey;
         this.clientId = _keys__WEBPACK_IMPORTED_MODULE_2__["keys"].ClientId;
@@ -576,6 +655,8 @@ let GooglePickerComponent = class GooglePickerComponent {
             let src;
             if (authResult && !authResult.error) {
                 if (authResult.access_token) {
+                    console.log(authResult);
+                    this.api.accessToken = authResult.access_token;
                     let view = new google.picker.View(google.picker.ViewId.DOCS);
                     view.setMimeTypes("application/vnd.google-apps.folder,image/png,image/jpeg,image/jpg,video/mp4");
                     let pickerBuilder = new google.picker.PickerBuilder();
@@ -604,7 +685,8 @@ let GooglePickerComponent = class GooglePickerComponent {
     }
 };
 GooglePickerComponent.ctorParameters = () => [
-    { type: src_app_services_file_service__WEBPACK_IMPORTED_MODULE_3__["FileService"] }
+    { type: src_app_services_file_service__WEBPACK_IMPORTED_MODULE_3__["FileService"] },
+    { type: src_app_services_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
@@ -646,30 +728,53 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var ngx_image_compress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-image-compress */ "./node_modules/ngx-image-compress/fesm2015/ngx-image-compress.js");
 /* harmony import */ var src_app_services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var src_app_services_file_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/file.service */ "./src/app/services/file.service.ts");
+
 
 
 
 
 let ImageCompressComponent = class ImageCompressComponent {
-    constructor(imageCompress, api) {
+    constructor(imageCompress, api, fileService) {
         this.imageCompress = imageCompress;
         this.api = api;
+        this.fileService = fileService;
+        this.files = [];
     }
-    selectFile(files) {
-        files.forEach(url => {
-            let fileName;
-            this.api.getImage(url).subscribe(image => {
-                console.log(image);
-                let reader = new FileReader();
-                reader.onload = (event) => {
-                    this.localUrl = event.target.result;
-                    this.compressFile(this.localUrl, fileName);
-                };
-                reader.readAsDataURL(image);
-            });
+    selectFile() {
+        let downloadedFiles = this.fileService.getDownloadedFiles();
+        downloadedFiles.forEach(file => {
+            console.log(file);
+            let fileName = file.image_details.name;
+            let reader = new FileReader();
+            reader.onload = (event) => {
+                this.localUrl = event.target.result;
+                console.log(fileName);
+                this.compressFile(this.localUrl, fileName);
+            };
+            reader.readAsDataURL(file.image);
         });
     }
+    // selectFile() {
+    //   var fileName: any;
+    //   // this.file = event.target.files[0];
+    //   fileName ="dawde";
+    //   // if (event.target.files && event.target.files[0]) {
+    //     this.api.getImage('https://wallpaperaccess.com/full/124518.jpg').subscribe(images => {
+    //       // images.forEach(image => {
+    //         console.log(images)
+    //         var reader = new FileReader();
+    //         reader.onload = (event: any) => {
+    //           this.localUrl = event.target.result;
+    //           this.compressFile(this.localUrl, fileName)
+    //         }
+    //         reader.readAsDataURL(images);
+    //       // });
+    //     })
+    //   // }
+    // }
     compressFile(image, fileName) {
+        console.log(fileName);
         var orientation = -1;
         this.sizeOfOriginalImage = this.imageCompress.byteCount(image) / (1024 * 1024);
         console.warn('Size in bytes is now:', this.sizeOfOriginalImage);
@@ -701,7 +806,8 @@ let ImageCompressComponent = class ImageCompressComponent {
 };
 ImageCompressComponent.ctorParameters = () => [
     { type: ngx_image_compress__WEBPACK_IMPORTED_MODULE_2__["NgxImageCompressService"] },
-    { type: src_app_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] }
+    { type: src_app_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
+    { type: src_app_services_file_service__WEBPACK_IMPORTED_MODULE_4__["FileService"] }
 ];
 ImageCompressComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

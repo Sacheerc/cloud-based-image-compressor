@@ -1,9 +1,13 @@
-<input
+<button mat-raised-button color="accent" aria-label="Not completed" (click)='selectFile()'>
+  <mat-icon style="color: green">play_circle_filled</mat-icon> Start
+</button>
+
+<!-- <input
   type="file"
   accept=".jpg,.png,.jpeg"
   id="image-input"
   (change)="selectFile($event)"
-/>
+/> -->
 <br /><br />
 Original: Size: {{ sizeOfOriginalImage | number: "1.2-2" }}MB <br /><img
   [src]="localUrl"

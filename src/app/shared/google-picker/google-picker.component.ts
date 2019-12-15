@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { keys } from '../../../keys'
 import { FileService } from 'src/app/services/file.service';
 import { FileListComponent } from 'src/app/modules/home/components/file-list/file-list.component';
+import { ApiService } from 'src/app/services/api.service';
 declare var gapi: any;
 declare var google: any;
 
@@ -13,7 +14,7 @@ declare var google: any;
 export class GooglePickerComponent{
   @Output() selectedFiles = new EventEmitter<any>();
 
-  constructor(private fileService: FileService) { }
+  constructor(private fileService: FileService, private api:ApiService) { }
   developerKey = keys.ApiKey;
   clientId = keys.ClientId
   scope = [
@@ -41,6 +42,8 @@ export class GooglePickerComponent{
         let src
         if (authResult && !authResult.error) {
           if (authResult.access_token) {
+            console.log(authResult)
+            this.api.accessToken = authResult.access_token;
             let view = new google.picker.View(google.picker.ViewId.DOCS);
             view.setMimeTypes("application/vnd.google-apps.folder,image/png,image/jpeg,image/jpg,video/mp4");
             let pickerBuilder = new google.picker.PickerBuilder();

@@ -4,7 +4,7 @@
       <h3 mat-subheader>Images</h3>
       <mat-list-item *ngFor="let file of imageArr">
         <mat-icon mat-list-icon>perm_media</mat-icon>
-        <p mat-line>url : {{ file.url }}</p>
+        <p mat-line>url : https://www.googleapis.com/drive/v2/files/{{ file.id }}</p>
         <mat-icon *ngIf='file.status == "done"' class="text-success">check_circle</mat-icon>
         <mat-icon *ngIf='file.status == "failed"' class="text-danger">info</mat-icon>
         

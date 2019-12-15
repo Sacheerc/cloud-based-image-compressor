@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { ApiService } from 'src/app/services/api.service';
+import { FileService } from 'src/app/services/file.service';
 
 @Component({
   selector: 'app-image-compress',
@@ -9,9 +10,14 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ImageCompressComponent implements OnInit {
 
-  constructor(private imageCompress: NgxImageCompressService, private api: ApiService) { }
+  constructor(
+    private imageCompress: NgxImageCompressService,
+    private api: ApiService,
+    private fileService: FileService
+  ) { }
 
   file: any;
+  files = [];
   localUrl: any;
   localCompressedURl: any;
   sizeOfOriginalImage: number;
@@ -19,22 +25,41 @@ export class ImageCompressComponent implements OnInit {
   imgResultBeforeCompress: string;
   imgResultAfterCompress: string;
 
-  selectFile(files) {
-    files.forEach(url =>{
-      let fileName:String
-      this.api.getImage(url).subscribe(image => {
-          console.log(image)
-          let reader = new FileReader();
-          reader.onload = (event: any) => {
-            this.localUrl = event.target.result;
-            this.compressFile(this.localUrl, fileName)
-          }
-          reader.readAsDataURL(image);
-        })
+  selectFile() {
+    let downloadedFiles = this.fileService.getDownloadedFiles()
+    downloadedFiles.forEach(file =>{
+      console.log(file)
+      let fileName = file.image_details.name;
+      let reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.localUrl = event.target.result;
+        console.log(fileName)
+        this.compressFile(this.localUrl, fileName)
+      }
+      reader.readAsDataURL(file.image);
       })
   }
+  // selectFile() {
+  //   var fileName: any;
+  //   // this.file = event.target.files[0];
+  //   fileName ="dawde";
+  //   // if (event.target.files && event.target.files[0]) {
+  //     this.api.getImage('https://wallpaperaccess.com/full/124518.jpg').subscribe(images => {
+  //       // images.forEach(image => {
+  //         console.log(images)
+  //         var reader = new FileReader();
+  //         reader.onload = (event: any) => {
+  //           this.localUrl = event.target.result;
+  //           this.compressFile(this.localUrl, fileName)
+  //         }
+  //         reader.readAsDataURL(images);
+  //       // });
+  //     })
+  //   // }
+  // }
 
   compressFile(image, fileName) {
+    console.log(fileName)
     var orientation = -1;
     this.sizeOfOriginalImage = this.imageCompress.byteCount(image) / (1024 * 1024);
     console.warn('Size in bytes is now:', this.sizeOfOriginalImage);
