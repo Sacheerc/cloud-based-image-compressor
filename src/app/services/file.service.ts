@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
-  downloadedFiles= [];
+  @Output() downloadedFiles= [];
+  @Output() compressedFiles : EventEmitter<any> = new EventEmitter();
   selectedFiles=[1,2,3,4];
   constructor() { }
 

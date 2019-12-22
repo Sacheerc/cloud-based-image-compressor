@@ -42,7 +42,7 @@ export class GooglePickerComponent{
         let src
         if (authResult && !authResult.error) {
           if (authResult.access_token) {
-            console.log(authResult)
+            this.api.tempId = authResult.issued_at
             this.api.accessToken = authResult.access_token;
             let view = new google.picker.View(google.picker.ViewId.DOCS);
             view.setMimeTypes("application/vnd.google-apps.folder,image/png,image/jpeg,image/jpg,video/mp4");
