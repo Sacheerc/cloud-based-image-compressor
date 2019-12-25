@@ -2,16 +2,18 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
   })
 };
-const downloadurl = "http://localhost:3000/files/download";
-const zipurl = "http://localhost:3000/files/zip";
-const fileurl = "http://localhost:3000/files";
-const compressurl = "http://localhost:3000/files/compress";
+const downloadurl = environment.uri +"/files/download";
+const zipurl = environment.uri + "/files/zip";
+const fileurl = environment.uri + "/files";
+const compressurl = environment.uri + "/files/compress";
+
 @Injectable({
   providedIn: 'root'
 })

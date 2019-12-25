@@ -52,7 +52,7 @@ module.exports = "<div class=\"container\">\n  <mat-card class=\"text-center add
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container text-center\">\n  <mat-card class=\"button-card\">\n    <app-image-compress></app-image-compress>\n  </mat-card>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <mat-card class=\"button-card\">\n    <div class=\"row\">\n      <div class=\"col-md-2\">\n        <app-image-compress></app-image-compress>\n      </div>\n      <div class=\"col-md-9\">\n        <mat-progress-bar\n          *ngIf='!isDownloaded'\n          mode=\"determinate\"\n          color=\"warn\"\n          [value]=\"value\"\n          class=\"mt-3\"\n        ></mat-progress-bar>\n        <a\n        *ngIf='isDownloaded'\n        mat-raised-button\n        color=\"accent\"\n        aria-label=\"Not completed\"\n        [href]= \"url + '/images/zip/' + fileName +'.zip'\"\n      >\n      <mat-icon style=\"color: green\">play_circle_filled</mat-icon> Download\n    </a>\n      </div>\n      <div *ngIf='!isDownloaded' class=\"col-md-1 mt-2 text-success\">\n        {{value}} %\n      </div>\n    </div>\n  </mat-card>\n</div>\n"
 
 /***/ }),
 
@@ -96,7 +96,7 @@ module.exports = "<mat-card class=\"button-card\">\n  <mat-card-title>Google Dri
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<button mat-raised-button color=\"accent\" aria-label=\"Not completed\" (click)='selectFile()'>\n  <mat-icon style=\"color: green\">play_circle_filled</mat-icon> Start\n</button>\n\n<!-- <input\n  type=\"file\"\n  accept=\".jpg,.png,.jpeg\"\n  id=\"image-input\"\n  (change)=\"selectFile($event)\"\n/> -->\n<br /><br />\nOriginal: Size: {{ sizeOfOriginalImage | number: \"1.2-2\" }}MB <br /><img\n  [src]=\"localUrl\"\n  height=\"200px\"\n/>\n<br /><br /><br />\nCompressed: Size: {{ sizeOFCompressedImage | number: \"1.2-2\" }}MB<br />\n<img [src]=\"localCompressedURl\" height=\"150px\" />\n"
+module.exports = "<button mat-raised-button color=\"accent\" aria-label=\"Not completed\" (click)='selectFile()'>\n  <mat-icon style=\"color: green\">play_circle_filled</mat-icon> Start\n</button>\n\n\n\n"
 
 /***/ }),
 
@@ -355,13 +355,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CompressorComponent", function() { return CompressorComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var src_app_services_file_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/file.service */ "./src/app/services/file.service.ts");
+/* harmony import */ var src_app_services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+
+
+
 
 
 let CompressorComponent = class CompressorComponent {
-    constructor() { }
+    constructor(fileService, api) {
+        this.fileService = fileService;
+        this.api = api;
+        this.value = 0;
+        this.isDownloaded = false;
+    }
     ngOnInit() {
+        this.url = src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].uri;
+        this.fileService.compressedFiles.subscribe(data => {
+            this.fileName = this.api.tempId;
+            this.value = data.length / this.fileService.downloadedFiles.length * 100;
+            if (data.length == this.fileService.downloadedFiles.length) {
+                this.api.createZip(data).subscribe(result => {
+                    console.log(result);
+                    this.isDownloaded = true;
+                });
+            }
+        });
     }
 };
+CompressorComponent.ctorParameters = () => [
+    { type: src_app_services_file_service__WEBPACK_IMPORTED_MODULE_2__["FileService"] },
+    { type: src_app_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] }
+];
 CompressorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-compressor',
@@ -422,19 +448,14 @@ let FileListComponent = class FileListComponent {
             });
         });
         this.imageArr.forEach(image => {
-            console.log(image);
-            this.api.getImage(image.id).subscribe(resultImage => {
+            this.api.getImage(image.id, image.name).subscribe(result => {
                 image.status = "done";
-                this.downloadedFiles.push({
-                    image_details: image,
-                    image: resultImage
-                });
+                this.downloadedFiles.push(result.name);
                 this.fileService.setDownloadedFiles(this.downloadedFiles);
             }, error => {
                 image.status = "failed";
             });
         });
-        console.log(this.imageArr);
     }
 };
 FileListComponent.ctorParameters = () => [
@@ -521,25 +542,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+
 
 
 
 const httpOptions = {
     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
         'Content-Type': 'application/json',
-        'Authorization': 'my-auth-token'
     })
 };
+const downloadurl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].uri + "/files/download";
+const zipurl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].uri + "/files/zip";
+const fileurl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].uri + "/files";
+const compressurl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].uri + "/files/compress";
 let ApiService = class ApiService {
     constructor(httpClient) {
         this.httpClient = httpClient;
     }
-    getImage(id) {
-        let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-            'Authorization': 'Bearer ' + this.accessToken
-        });
-        let url = 'https://www.googleapis.com/drive/v2/files/' + id + '?alt=media';
-        return this.httpClient.get(url, { headers: headers, responseType: 'blob' });
+    getImage(id, name) {
+        let data = {
+            id: id,
+            dir: this.tempId,
+            name: name,
+            token: this.accessToken
+        };
+        return this.httpClient.post(downloadurl, data, httpOptions);
+    }
+    compressImages(image, quality) {
+        let data = {
+            image: image,
+            quality: quality,
+            dir: this.tempId,
+        };
+        return this.httpClient.post(compressurl, data, httpOptions);
+    }
+    createZip(images) {
+        let data = {
+            images: images,
+            dir: this.tempId,
+        };
+        return this.httpClient.post(zipurl, data, httpOptions);
+    }
+    getFile() {
+        return this.httpClient.get(fileurl);
     }
 };
 ApiService.ctorParameters = () => [
@@ -572,6 +618,7 @@ __webpack_require__.r(__webpack_exports__);
 let FileService = class FileService {
     constructor() {
         this.downloadedFiles = [];
+        this.compressedFiles = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.selectedFiles = [1, 2, 3, 4];
     }
     setDownloadedFiles(files) {
@@ -587,6 +634,12 @@ let FileService = class FileService {
         return this.selectedFiles;
     }
 };
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
+], FileService.prototype, "downloadedFiles", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
+], FileService.prototype, "compressedFiles", void 0);
 FileService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
@@ -655,7 +708,7 @@ let GooglePickerComponent = class GooglePickerComponent {
             let src;
             if (authResult && !authResult.error) {
                 if (authResult.access_token) {
-                    console.log(authResult);
+                    this.api.tempId = authResult.issued_at;
                     this.api.accessToken = authResult.access_token;
                     let view = new google.picker.View(google.picker.ViewId.DOCS);
                     view.setMimeTypes("application/vnd.google-apps.folder,image/png,image/jpeg,image/jpg,video/mp4");
@@ -726,88 +779,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImageCompressComponent", function() { return ImageCompressComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var ngx_image_compress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-image-compress */ "./node_modules/ngx-image-compress/fesm2015/ngx-image-compress.js");
-/* harmony import */ var src_app_services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/api.service */ "./src/app/services/api.service.ts");
-/* harmony import */ var src_app_services_file_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/file.service */ "./src/app/services/file.service.ts");
-
+/* harmony import */ var src_app_services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var src_app_services_file_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/file.service */ "./src/app/services/file.service.ts");
 
 
 
 
 let ImageCompressComponent = class ImageCompressComponent {
-    constructor(imageCompress, api, fileService) {
-        this.imageCompress = imageCompress;
+    constructor(api, fileService) {
         this.api = api;
         this.fileService = fileService;
-        this.files = [];
     }
     selectFile() {
         let downloadedFiles = this.fileService.getDownloadedFiles();
-        downloadedFiles.forEach(file => {
-            console.log(file);
-            let fileName = file.image_details.name;
-            let reader = new FileReader();
-            reader.onload = (event) => {
-                this.localUrl = event.target.result;
-                console.log(fileName);
-                this.compressFile(this.localUrl, fileName);
-            };
-            reader.readAsDataURL(file.image);
+        let compressedFiles = [];
+        downloadedFiles.forEach(image => {
+            this.api.compressImages(image, 40).subscribe(data => {
+                compressedFiles.push(data.image);
+                this.fileService.compressedFiles.emit(compressedFiles);
+            });
         });
-    }
-    // selectFile() {
-    //   var fileName: any;
-    //   // this.file = event.target.files[0];
-    //   fileName ="dawde";
-    //   // if (event.target.files && event.target.files[0]) {
-    //     this.api.getImage('https://wallpaperaccess.com/full/124518.jpg').subscribe(images => {
-    //       // images.forEach(image => {
-    //         console.log(images)
-    //         var reader = new FileReader();
-    //         reader.onload = (event: any) => {
-    //           this.localUrl = event.target.result;
-    //           this.compressFile(this.localUrl, fileName)
-    //         }
-    //         reader.readAsDataURL(images);
-    //       // });
-    //     })
-    //   // }
-    // }
-    compressFile(image, fileName) {
-        console.log(fileName);
-        var orientation = -1;
-        this.sizeOfOriginalImage = this.imageCompress.byteCount(image) / (1024 * 1024);
-        console.warn('Size in bytes is now:', this.sizeOfOriginalImage);
-        this.imageCompress.compressFile(image, orientation, 50, 50).then(result => {
-            this.imgResultAfterCompress = result;
-            this.localCompressedURl = result;
-            this.sizeOFCompressedImage = this.imageCompress.byteCount(result) / (1024 * 1024);
-            console.warn('Size in bytes after compression:', this.sizeOFCompressedImage);
-            // create file from byte
-            const imageName = fileName;
-            // call method that creates a blob from dataUri
-            const imageBlob = this.dataURItoBlob(this.imgResultAfterCompress.split(',')[1]);
-            //imageFile created below is the new compressed file which can be send to API in form data
-            const imageFile = new File([result], imageName, { type: 'image/jpeg' });
-        });
-    }
-    dataURItoBlob(dataURI) {
-        const byteString = window.atob(dataURI);
-        const arrayBuffer = new ArrayBuffer(byteString.length);
-        const int8Array = new Uint8Array(arrayBuffer);
-        for (let i = 0; i < byteString.length; i++) {
-            int8Array[i] = byteString.charCodeAt(i);
-        }
-        const blob = new Blob([int8Array], { type: 'image/jpeg' });
-        return blob;
     }
     ngOnInit() {
     }
 };
 ImageCompressComponent.ctorParameters = () => [
-    { type: ngx_image_compress__WEBPACK_IMPORTED_MODULE_2__["NgxImageCompressService"] },
-    { type: src_app_services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"] },
-    { type: src_app_services_file_service__WEBPACK_IMPORTED_MODULE_4__["FileService"] }
+    { type: src_app_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"] },
+    { type: src_app_services_file_service__WEBPACK_IMPORTED_MODULE_3__["FileService"] }
 ];
 ImageCompressComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -877,7 +875,9 @@ __webpack_require__.r(__webpack_exports__);
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 const environment = {
-    production: false
+    production: false,
+    // uri: "http://localhost:3000"
+    uri: "http://34.93.161.110:3000"
 };
 /*
  * For easier debugging in development mode, you can import the following file

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxImageCompressService } from 'ngx-image-compress';
-import { saveAs } from "file-saver";
 import { ApiService } from 'src/app/services/api.service';
 import { FileService } from 'src/app/services/file.service';
 
