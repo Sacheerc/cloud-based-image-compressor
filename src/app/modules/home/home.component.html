@@ -1,6 +1,15 @@
 <!-- <app-google-picker></app-google-picker>
 
 <app-image-compress></app-image-compress> -->
-<app-add-files (selectedFiles)="onFileSelect($event)"> </app-add-files>
-<app-file-list *ngIf='isVisible' [selectedFiles]="selectedFiles"></app-file-list>
-<app-compressor></app-compressor>
+<div
+  style="min-height: 520px; background-image: url('../../assets/background.jpg');background-size: 1500px 320px;background-repeat: no-repeat; ; padding-top: 100px;"
+>
+  <app-add-files (selectedFiles)="onFileSelect($event)"> </app-add-files>
+  <app-file-list
+    *ngIf="isVisible"
+    [selectedFiles]="selectedFiles"
+  ></app-file-list>
+  <br />
+  <app-compressor></app-compressor>
+  <br />
+</div>

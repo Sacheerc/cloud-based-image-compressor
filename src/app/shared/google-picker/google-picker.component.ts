@@ -57,7 +57,7 @@ export class GooglePickerComponent{
                 if (e[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
                   let docs = e[google.picker.Response.DOCUMENTS];
                   this.fileService.setSelectedFiles(docs);
-                  console.log(this.fileService.getSelectedFiles())
+                  alert(this.fileService.getSelectedFiles().length+" images are selected")
                   this.selectedFiles.emit(docs)
                 }
               }).

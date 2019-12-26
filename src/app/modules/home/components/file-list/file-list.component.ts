@@ -20,6 +20,8 @@ export class FileListComponent implements OnInit {
   @Input() selectedFiles;
   imageArr: Image[] = []
   downloadedFiles = [];
+  value = 0;
+  isDownloaded = false;
 
   ngOnInit() {
     this.downloadedFiles = [];
@@ -39,6 +41,11 @@ export class FileListComponent implements OnInit {
         image.status = "done";
         this.downloadedFiles.push(result.name)
         this.fileService.setDownloadedFiles(this.downloadedFiles)
+        this.value = this.downloadedFiles.length / this.imageArr.length * 100
+        if (this.value == 100) {
+          this.isDownloaded = true;
+          this.fileService.isDownloadCompleted.emit(true);
+        }
       }, error => {
         image.status = "failed";
       })

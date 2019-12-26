@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-nav-bar></app-nav-bar>\n\n<router-outlet></router-outlet>"
+module.exports = "<app-nav-bar></app-nav-bar>\n\n<router-outlet></router-outlet>\n\n<footer class=\"text-center bg-warning p-1\">\n  <p>&copy; All rights reserved for <i>Reduzer</i> 2020</p>\n</footer>\n"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = "<app-nav-bar></app-nav-bar>\n\n<router-outlet></router-outlet>
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <mat-card class=\"text-center add-files\">\n    <mat-card-header>\n      <mat-card-title>Pic your images</mat-card-title>\n    </mat-card-header>\n    <div class=\"row\">\n      <div class=\"col-md-4\">\n        <mat-card class=\"button-card\">\n          <mat-card-title>local computer</mat-card-title>\n          <button mat-fab aria-label=\"Upload files from local computer\">\n            <mat-icon>computer</mat-icon>\n          </button>\n        </mat-card>\n      </div>\n      <div class=\"col-md-4\">\n          <app-google-picker\n            (selectedFiles) = \"onFileSelect($event)\"\n          ></app-google-picker>\n      </div>\n      \n      <div class=\"col-md-4\">\n        <mat-card class=\"button-card\">\n          <mat-card-title>Drop Box</mat-card-title>\n          <button mat-fab aria-label=\"Not completed\">\n            <mat-icon>block</mat-icon>\n          </button>\n        </mat-card>\n      </div>\n    </div>\n  </mat-card>\n  <mat-progress-bar color=\"accent\" mode=\"indeterminate\"></mat-progress-bar>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <mat-card class=\"text-center add-files\" style=\"background-color: rgba(211, 211, 211, 0.61);\">\n    <div class=\"text-center \">\n      <mat-card-title>Pick your images</mat-card-title>\n    </div>\n    <div class=\"row\">\n      <div class=\"col-md-4 \">\n        <mat-card class=\"button-card\" style=\"background-color: rgba(255, 255, 255, 0.904);\">\n          <mat-card-title >local computer</mat-card-title>\n          <button mat-fab aria-label=\"Upload files from local computer\">\n            <mat-icon>computer</mat-icon>\n          </button>\n        </mat-card>\n      </div>\n      <div class=\"col-md-4\">\n        <app-google-picker\n          (selectedFiles)=\"onFileSelect($event)\"\n        ></app-google-picker>\n      </div>\n\n      <div class=\"col-md-4\">\n        <mat-card class=\"button-card\" style=\"background-color: rgba(255, 255, 255, 0.904);\">\n          <mat-card-title >Drop Box</mat-card-title>\n          <button mat-fab aria-label=\"Not completed\">\n            <mat-icon>block</mat-icon>\n          </button>\n        </mat-card>\n      </div>\n    </div>\n  </mat-card>\n</div>\n"
 
 /***/ }),
 
@@ -52,7 +52,7 @@ module.exports = "<div class=\"container\">\n  <mat-card class=\"text-center add
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <mat-card class=\"button-card\">\n    <div class=\"row\">\n      <div class=\"col-md-2\">\n        <app-image-compress></app-image-compress>\n      </div>\n      <div class=\"col-md-9\">\n        <mat-progress-bar\n          *ngIf='!isDownloaded'\n          mode=\"determinate\"\n          color=\"warn\"\n          [value]=\"value\"\n          class=\"mt-3\"\n        ></mat-progress-bar>\n        <a\n        *ngIf='isDownloaded'\n        mat-raised-button\n        color=\"accent\"\n        aria-label=\"Not completed\"\n        [href]= \"url + '/images/zip/' + fileName +'.zip'\"\n      >\n      <mat-icon style=\"color: green\">play_circle_filled</mat-icon> Download\n    </a>\n      </div>\n      <div *ngIf='!isDownloaded' class=\"col-md-1 mt-2 text-success\">\n        {{value}} %\n      </div>\n    </div>\n  </mat-card>\n</div>\n"
+module.exports = "<div class=\"container\" *ngIf=\"isDownloadCompleted\">\n  <mat-card class=\"button-card\">\n    <div class=\"row\">\n      <div class=\"col-md-12 text-center\">\n        <app-image-compress *ngIf=\"!isStarted\"></app-image-compress>\n        <div class=\"row\" *ngIf=\"isStarted && !isDownloaded\">\n          <div class=\"col-md-10\">\n            <mat-progress-bar\n              mode=\"determinate\"\n              color=\"warn\"\n              [value]=\"value\"\n              class=\"mt-3\"\n            ></mat-progress-bar>\n          </div>\n          <div class=\"col-md-2 mt-2 text-success\">{{ value }} %</div>\n        </div>\n        <button\n          *ngIf=\"isDownloaded && !refresh\"\n          mat-raised-button\n          color=\"accent\"\n          aria-label=\"Not completed\"\n          (click)=\"downloadZip()\"\n        >\n          <mat-icon style=\"color: green\">play_circle_filled</mat-icon> Download\n        </button>\n        <button\n          *ngIf=\"refresh\"\n          mat-raised-button\n          color=\"accent\"\n          aria-label=\"Not completed\"\n          (click)=\"refreshReduzer()\"\n        >\n          <mat-icon style=\"color: green\">refresh</mat-icon> Refresh\n        </button>\n      </div>\n    </div>\n  </mat-card>\n</div>\n"
 
 /***/ }),
 
@@ -63,7 +63,7 @@ module.exports = "<div class=\"container\">\n  <mat-card class=\"button-card\">\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"\">\n    <mat-list>\n      <h3 mat-subheader>Images</h3>\n      <mat-list-item *ngFor=\"let file of imageArr\">\n        <mat-icon mat-list-icon>perm_media</mat-icon>\n        <p mat-line>url : https://www.googleapis.com/drive/v2/files/{{ file.id }}</p>\n        <mat-icon *ngIf='file.status == \"done\"' class=\"text-success\">check_circle</mat-icon>\n        <mat-icon *ngIf='file.status == \"failed\"' class=\"text-danger\">info</mat-icon>\n        \n        <p mat-line>\n          <mat-progress-bar *ngIf='file.status == \"processing\"'\n            color=\"primary\"\n            mode=\"indeterminate\"\n          ></mat-progress-bar>\n          Original Size Bytes : {{file.size/8/1024}}KB\n        </p>\n      </mat-list-item>\n      <mat-divider></mat-divider>\n    </mat-list>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"\">\n    <mat-list>\n      <h3 mat-subheader>Images</h3>\n      <mat-list-item *ngFor=\"let file of imageArr\">\n        <mat-icon mat-list-icon>perm_media</mat-icon>\n        <p mat-line>\n          url : https://www.googleapis.com/drive/v2/files/{{ file.id }}\n        </p>\n        <mat-icon *ngIf=\"file.status == 'done'\" class=\"text-success\"\n          >check_circle</mat-icon\n        >\n        <mat-icon *ngIf=\"file.status == 'failed'\" class=\"text-danger\"\n          >info</mat-icon\n        >\n\n        <p mat-line>\n          <mat-progress-bar\n            *ngIf=\"file.status == 'processing'\"\n            color=\"primary\"\n            mode=\"indeterminate\"\n          ></mat-progress-bar>\n          Original Size: {{ file.size / 1024 }} KB\n        </p>\n      </mat-list-item>\n      <mat-divider></mat-divider>\n    </mat-list>\n  </div>\n  <br>\n  <mat-card *ngIf=\"!isDownloaded\">\n    <div class=\"row\">\n      <div class=\"col-md-10\">\n        downloading\n        <mat-progress-bar\n          mode=\"determinate\"\n          color=\"primary\"\n          [value]=\"value\"\n          class=\"mt-3\"\n        ></mat-progress-bar>\n      </div>\n      <div class=\"col-md-2 text-success\">\n        {{value}}% completed\n      </div>\n    </div>\n  </mat-card>\n</div>\n"
 
 /***/ }),
 
@@ -74,7 +74,7 @@ module.exports = "<div class=\"container\">\n  <div class=\"\">\n    <mat-list>\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <app-google-picker></app-google-picker>\n\n<app-image-compress></app-image-compress> -->\n<app-add-files (selectedFiles)=\"onFileSelect($event)\"> </app-add-files>\n<app-file-list *ngIf='isVisible' [selectedFiles]=\"selectedFiles\"></app-file-list>\n<app-compressor></app-compressor>\n"
+module.exports = "<!-- <app-google-picker></app-google-picker>\n\n<app-image-compress></app-image-compress> -->\n<div\n  style=\"min-height: 520px; background-image: url('../../assets/background.jpg');background-size: 1500px 320px;background-repeat: no-repeat; ; padding-top: 100px;\"\n>\n  <app-add-files (selectedFiles)=\"onFileSelect($event)\"> </app-add-files>\n  <app-file-list\n    *ngIf=\"isVisible\"\n    [selectedFiles]=\"selectedFiles\"\n  ></app-file-list>\n  <br />\n  <app-compressor></app-compressor>\n  <br />\n</div>\n"
 
 /***/ }),
 
@@ -85,7 +85,7 @@ module.exports = "<!-- <app-google-picker></app-google-picker>\n\n<app-image-com
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-card class=\"button-card\">\n  <mat-card-title>Google Drive</mat-card-title>\n  <button mat-fab (click)=\"loadGoogleDrive()\" aria-label=\"Open google drive\">\n    <mat-icon>cloud_download</mat-icon>\n  </button>\n</mat-card>\n"
+module.exports = "<mat-card class=\"button-card\" style=\"background-color: rgba(255, 255, 255, 0.904);\">\n  <mat-card-title class=\"\">Google Drive</mat-card-title>\n  <button mat-fab (click)=\"loadGoogleDrive()\" aria-label=\"Open google drive\">\n    <mat-icon>cloud_download</mat-icon>\n  </button>\n</mat-card>\n"
 
 /***/ }),
 
@@ -107,7 +107,7 @@ module.exports = "<button mat-raised-button color=\"accent\" aria-label=\"Not co
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-toolbar color=\"accent\">\n  <span>ReduZer</span>\n  <span class=\"example-fill-remaining-space\"></span>\n  <span>Right Aligned Text</span>\n</mat-toolbar>\n"
+module.exports = "<mat-toolbar color=\"accent\">\n  <!-- <span>ReduZer</span> -->\n  <img src=\"../../../assets/logo.png\" alt=\"\" style=\"height: 45px; margin-top: -5px;margin-left: 20px;\" />\n  <span class=\"example-fill-remaining-space\"></span>\n  <span></span>\n</mat-toolbar>\n"
 
 /***/ }),
 
@@ -368,11 +368,18 @@ let CompressorComponent = class CompressorComponent {
         this.fileService = fileService;
         this.api = api;
         this.value = 0;
+        this.refresh = false;
         this.isDownloaded = false;
+        this.isStarted = false;
+        this.isDownloadCompleted = false;
     }
     ngOnInit() {
         this.url = src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].uri;
+        this.fileService.isDownloadCompleted.subscribe(data => {
+            this.isDownloadCompleted = data;
+        });
         this.fileService.compressedFiles.subscribe(data => {
+            this.isStarted = true;
             this.fileName = this.api.tempId;
             this.value = data.length / this.fileService.downloadedFiles.length * 100;
             if (data.length == this.fileService.downloadedFiles.length) {
@@ -382,6 +389,13 @@ let CompressorComponent = class CompressorComponent {
                 });
             }
         });
+    }
+    downloadZip() {
+        this.refresh = true;
+        window.location.href = (this.url + '/images/zip/' + this.fileName + '.zip');
+    }
+    refreshReduzer() {
+        window.location.reload();
     }
 };
 CompressorComponent.ctorParameters = () => [
@@ -435,6 +449,8 @@ let FileListComponent = class FileListComponent {
         this.fileService = fileService;
         this.imageArr = [];
         this.downloadedFiles = [];
+        this.value = 0;
+        this.isDownloaded = false;
     }
     ngOnInit() {
         this.downloadedFiles = [];
@@ -452,6 +468,11 @@ let FileListComponent = class FileListComponent {
                 image.status = "done";
                 this.downloadedFiles.push(result.name);
                 this.fileService.setDownloadedFiles(this.downloadedFiles);
+                this.value = this.downloadedFiles.length / this.imageArr.length * 100;
+                if (this.value == 100) {
+                    this.isDownloaded = true;
+                    this.fileService.isDownloadCompleted.emit(true);
+                }
             }, error => {
                 image.status = "failed";
             });
@@ -619,6 +640,7 @@ let FileService = class FileService {
     constructor() {
         this.downloadedFiles = [];
         this.compressedFiles = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.isDownloadCompleted = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.selectedFiles = [1, 2, 3, 4];
     }
     setDownloadedFiles(files) {
@@ -640,6 +662,9 @@ tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
 ], FileService.prototype, "compressedFiles", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])()
+], FileService.prototype, "isDownloadCompleted", void 0);
 FileService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
@@ -723,7 +748,7 @@ let GooglePickerComponent = class GooglePickerComponent {
                         if (e[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
                             let docs = e[google.picker.Response.DOCUMENTS];
                             this.fileService.setSelectedFiles(docs);
-                            console.log(this.fileService.getSelectedFiles());
+                            alert(this.fileService.getSelectedFiles().length + " images are selected");
                             this.selectedFiles.emit(docs);
                         }
                     }).
