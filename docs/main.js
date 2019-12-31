@@ -74,7 +74,7 @@ module.exports = "<br>\n<div class=\"container\">\n  <div class=\"\">\n    <mat-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <app-google-picker></app-google-picker>\n\n<app-image-compress></app-image-compress> -->\n<div\n  style=\"min-height: 520px; background-image: url('../../assets/background.jpg');background-size: 1500px 320px;background-repeat: no-repeat; ; padding-top: 100px;\"\n>\n  <app-add-files (selectedFiles)=\"onFileSelect($event)\"> </app-add-files>\n  <app-file-list\n    *ngIf=\"isVisible\"\n    [selectedFiles]=\"selectedFiles\"\n  ></app-file-list>\n  <br />\n  <app-compressor></app-compressor>\n  <br />\n</div>\n"
+module.exports = "<!-- <app-google-picker></app-google-picker>\n\n<app-image-compress></app-image-compress> -->\n<div\n  style=\"min-height: 86%; background-image: url('../../assets/background.jpg');background-size: 100% 320px;background-repeat: no-repeat; ; padding-top: 100px;\"\n>\n  <app-add-files (selectedFiles)=\"onFileSelect($event)\"> </app-add-files>\n  <app-file-list\n    *ngIf=\"isVisible\"\n    [selectedFiles]=\"selectedFiles\"\n  ></app-file-list>\n  <br />\n  <app-compressor></app-compressor>\n  <br />\n</div>\n"
 
 /***/ }),
 
