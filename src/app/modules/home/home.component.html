@@ -1,14 +1,24 @@
 <!-- <app-google-picker></app-google-picker>
 
 <app-image-compress></app-image-compress> -->
-<div
-  style="min-height: 86%; background-image: url('../../assets/background.jpg');background-size: 100% 350px;background-repeat: no-repeat; ; padding-top: 40px;"
->
-  <div class="container text-center" style="font-size: 20px; color: rgb(71, 71, 71);">
-    <img src="../../assets/logo.png" alt="" style="width: 250px;"><br>
-    <strong>Bulk image size reducer <br>  No limitations, Totally free and super fast!</strong>
+<div class="background">
+  <div class="container">
+      <mat-card class="container text-center" style="font-size: 20px; color: rgb(71, 71, 71); background-color: rgba(255, 255, 255, 0.904);">
+          <img src="../../assets/logo.png" alt="" style="width: 200px;"><br>
+          <strong>Bulk Image Compressor <br>  No limitations, Totally free and super fast!</strong>
+        </mat-card>
   </div>
   <app-add-files (selectedFiles)="onFileSelect($event)"> </app-add-files>
+  <div class=" container">
+    <div class="text-left p-5">
+        <h3 class="text-secondary">How it Works?</h3>
+        <br>
+        <p>
+          The Reduzer App fetches your large size images from google drive within few seconds by using it's back-end server. Therefore there is no any data charge for your side to download large image files. Then the Reduzer app automatically starts the image resizing process according to your request. Then it will create a zip file and you will be allowed to download it within a single click. <br><br> <strong>Your images will be automatically deleted from our servers within an hour. <br><span class="text-dark"> So it's time to work with Reduzer and  save your data!  </span></strong> 
+        </p>
+    </div>
+    
+  </div>
   <app-file-list
     *ngIf="isVisible"
     [selectedFiles]="selectedFiles"
