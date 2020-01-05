@@ -2,8 +2,12 @@
 
 <app-image-compress></app-image-compress> -->
 <div
-  style="min-height: 86%; background-image: url('../../assets/background.jpg');background-size: 100% 320px;background-repeat: no-repeat; ; padding-top: 100px;"
+  style="min-height: 86%; background-image: url('../../assets/background.jpg');background-size: 100% 350px;background-repeat: no-repeat; ; padding-top: 40px;"
 >
+  <div class="container text-center" style="font-size: 20px; color: rgb(71, 71, 71);">
+    <img src="../../assets/logo.png" alt="" style="width: 250px;"><br>
+    <strong>Bulk image size reducer <br>  No limitations, Totally free and super fast!</strong>
+  </div>
   <app-add-files (selectedFiles)="onFileSelect($event)"> </app-add-files>
   <app-file-list
     *ngIf="isVisible"
