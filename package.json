@@ -3,11 +3,17 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
+    "start-dev": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "heroku-postbuild": "ng build --prod"
+  },
+  "engines": {
+    "node": "14.17.5",
+    "npm": "6.14.14"
   },
   "private": true,
   "dependencies": {
@@ -26,10 +32,12 @@
     "@types/gapi.client.drive": "^3.0.3",
     "angular-cli-ghpages": "^0.6.0",
     "bootstrap": "^4.4.1",
+    "express": "^4.17.2",
     "file-saver": "^2.0.5",
     "hammerjs": "^2.0.8",
     "jszip": "^3.7.1",
     "ngx-image-compress": "^8.0.3",
+    "path": "^0.12.7",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
