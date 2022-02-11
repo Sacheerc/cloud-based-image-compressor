@@ -21,6 +21,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AddFilesComponent } from './modules/home/components/add-files/add-files.component';
 import { MatCardModule } from '@angular/material/card';
 import { CompressorComponent } from './modules/home/components/compressor/compressor.component';
+import { LocalFilePickerComponent } from './shared/local-file-picker/local-file-picker.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CompressorComponent } from './modules/home/components/compressor/compre
     FileListComponent,
     AddFilesComponent,
     CompressorComponent,
+    LocalFilePickerComponent,
 
   ],
   imports: [

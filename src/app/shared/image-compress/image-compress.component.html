@@ -1,6 +1,19 @@
-<button mat-raised-button color="accent" aria-label="Not completed" (click)='selectFile()'>
-  <mat-icon style="color: green">play_circle_filled</mat-icon> Start
+<button
+  *ngIf="downloadedFiles.length !== compressedImages.length"
+  mat-raised-button
+  color="accent"
+  aria-label="Not completed"
+  (click)="selectFileLocally()"
+>
+  <mat-icon style="color: green">play_circle_filled</mat-icon> Compress Images
 </button>
-
-
-
+<button
+  *ngIf="downloadedFiles.length === compressedImages.length"
+  mat-raised-button
+  color="accent"
+  aria-label="Not completed"
+  (click)="download()"
+>
+  <mat-icon style="color: rgb(128, 0, 90)">play_circle_filled</mat-icon>
+  Download Zip
+</button>

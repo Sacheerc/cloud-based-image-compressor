@@ -1,20 +1,20 @@
-import { Injectable, Output, EventEmitter } from '@angular/core';
+import { Injectable, Output, EventEmitter } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class FileService {
-  @Output() downloadedFiles= [];
-  @Output() compressedFiles : EventEmitter<any> = new EventEmitter();
+  @Output() downloadedFiles = [];
+  @Output() compressedFiles: EventEmitter<any> = new EventEmitter();
   @Output() isDownloadCompleted: EventEmitter<any> = new EventEmitter();
-  selectedFiles=[1,2,3,4];
-  constructor() { }
+  selectedFiles = [1, 2, 3, 4];
+  constructor() {}
 
-  setDownloadedFiles(files){
+  setDownloadedFiles(files) {
     this.downloadedFiles = files;
   }
 
-  getDownloadedFiles(){
+  getDownloadedFiles() {
     return this.downloadedFiles;
   }
 
@@ -25,6 +25,4 @@ export class FileService {
   getSelectedFiles() {
     return this.selectedFiles;
   }
-
-
 }
